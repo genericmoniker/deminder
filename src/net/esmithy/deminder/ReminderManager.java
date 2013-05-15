@@ -24,6 +24,12 @@ public class ReminderManager {
         this.mContext = context;
     }
 
+    /**
+     * Removes reminders for "all day" events within a number of days in the future.
+     *
+     * @param daysToSearch number of days into the future to search.
+     * @return list of events with modified reminders.
+     */
     public ArrayList<Event> demindAllDayEvents(int daysToSearch) {
         ArrayList<Event> results = new ArrayList<Event>();
         ArrayList<EventInstance> instances = searchForEventInstances(daysToSearch);
@@ -69,6 +75,12 @@ public class ReminderManager {
         return results;
     }
 
+    /**
+     * Deletes all the event reminders for an event instance.
+     *
+     * @param instance event instance for which to delete reminders.
+     * @return the number of reminders deleted.
+     */
     private int deleteRemindersForEventInstance(EventInstance instance) {
         int remindersDeleted = 0;
         ContentResolver resolver = mContext.getContentResolver();
@@ -81,6 +93,12 @@ public class ReminderManager {
         return remindersDeleted;
     }
 
+    /**
+     * Finds reminders for a given event.
+     *
+     * @param eventId id of the event for which to find reminders.
+     * @return list of found reminders.
+     */
     private ArrayList<Reminder> searchForReminders(long eventId) {
         ArrayList<Reminder> results = new ArrayList<Reminder>();
         String[] projection = new String[] {
@@ -103,7 +121,13 @@ public class ReminderManager {
         return results;
     }
 
-    private Uri getEventInstancesSearchUri(int daysToSearch){
+    /**
+     * Gets a URI to search for event instances within a time range.
+     *
+     * @param daysToSearch days from now to search.
+     * @return URI suitable for querying the event instances table.
+     */
+    private Uri getEventInstancesSearchUri(int daysToSearch) {
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
         Calendar now = Calendar.getInstance();
         ContentUris.appendId(builder, now.getTimeInMillis());
