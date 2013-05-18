@@ -3,7 +3,8 @@
 #################
 
 workspace.xml
-
+*.class
+*.apk
 
 #################
 ## Eclipse
