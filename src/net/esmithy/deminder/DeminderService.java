@@ -65,8 +65,8 @@ public class DeminderService extends Service {
 
         private void notifyEventChanged(Event event) {
             Notification.Builder builder = new Notification.Builder(mService)
-                            .setSmallIcon(R.drawable.ic_launcher)
-                            .setContentTitle("Event Deminded")
+                            .setSmallIcon(R.drawable.ic_demind)
+                            .setContentTitle("Event deminded")
                             .setContentText(event.toString());
             NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(NOTIFY_ID, builder.build());
